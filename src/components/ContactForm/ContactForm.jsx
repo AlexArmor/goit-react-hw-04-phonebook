@@ -7,21 +7,18 @@ import { InputNumber } from './ContactForm.styled';
 import { BtnSubmit } from './ContactForm.styled';
 
 export const ContactForm = ({ onFormSubmit }) => {
-  // const [userData, setUserData] = useState({});
-  const [name, setName] = useState('');
-  const [number, setNumber] = useState('');
+  const [userData, setUserData] = useState({});
 
   const inputChange = event => {
-    if (event.target.name === 'name') {
-      setName(event.target.value);
-    } else if (event.target.name === 'number') {
-      setNumber(event.target.value);
-    }
+    setUserData(prevState => ({
+      ...prevState,
+      [event.target.name]: event.target.value,
+    }));
   };
 
   const handleSubmit = event => {
     event.preventDefault();
-    onFormSubmit({ name, number });
+    onFormSubmit(userData);
     event.target.reset();
   };
 
